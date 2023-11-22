@@ -12,4 +12,4 @@ Scores are stored on a PlanetScale DB because frankly I didn't want to write an 
 
 Please don't steal my .env keys they're very near and dear to my heart, this is horribly horribly insecure but that was not the focus
 
-I tried to upload this to github pages, but because the
+I tried to upload this to github pages, but because the fetching of questions is done via my own "backend" API request to the serverside of the application github is not too happy about dynamically generating those pages unfortunatley. I know that I've been marked down in the past for not using github pages to deploy my application, but this time there actually is a valid reason and I really did try, I just learned that you can't do server side calls and rendering atleast the way I'm doing so in next on GitHub pages.
