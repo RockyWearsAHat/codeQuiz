@@ -11,3 +11,5 @@ Questions are drawn randomly from the questions.json file and will not repeat un
 Scores are stored on a PlanetScale DB because frankly I didn't want to write an entire server for this, that's overkill on overkill.
 
 Please don't steal my .env keys they're very near and dear to my heart, this is horribly horribly insecure but that was not the focus
+
+I tried to upload this to github pages, but because the
