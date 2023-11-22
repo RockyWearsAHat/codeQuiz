@@ -1,0 +1,97 @@
+{
+  "question0": {
+    "question": "What Are The Correct Ways To Declare A Heading?",
+    "answers": [
+      "&lt;heading&gt;",
+      "&lt;h1&gt;",
+      "&lt;h4&gt;",
+      "&lt;h6&gt;",
+      "&lt;h7&gt;"
+    ],
+    "correctAnswer": ["&lt;h1&gt;", "&lt;h4&gt;", "&lt;h6&gt;"],
+    "explination": "Headings are &lt;h&gt; tags in HTML, used for creating headers/large text, &lt;header&gt; and &lt;h7&gt; both do not exist in standard HTML",
+    "reference": "W3 - HTML Header Tags: https://www.w3docs.com/learn-html/html-basic.html#html-headings-6"
+  },
+
+  "question1": {
+    "question": "What Are Examples Of Elements?",
+    "answers": [
+      "&lt;header&gt;",
+      "&lt;div&gt;",
+      "&lt;foot&gt;",
+      "&lt;root&gt;",
+      "&lt;p&gt;"
+    ],
+    "correctAnswer": ["&lt;header&gt;", "&lt;div&gt;", "&lt;p&gt;"],
+    "explination": "&lt;header&gt;, &lt;div&gt;, and &lt;p&gt; are all valid HTML elements, however, &lt;foot&gt; and &lt;root&gt; are not, foot should be footer to use the footer element, and root is by default a CSS class that is added that is added to the base HTML document that can be used to target all classes in that HTML element. However, root is not an element, rather a way to access the root element in CSS.",
+    "reference": [
+      "W3 - Standard Somantic Elements: https://www.w3docs.com/learn-html/html-elements.html#result-8",
+      "W3 - root Pseudo Selector: https://www.w3.org/wiki/CSS/Selectors/pseudo-classes/:root"
+    ]
+  },
+
+  "question2": {
+    "question": "How Can You Get An Element In JavaScript?",
+    "answers": [
+      "var item = document.getElementById(\"itemId\");",
+      "var item = document.querySelector(\"itemId\");",
+      "var item = document.querySelector(\".itemClass\");",
+      "var item = document.getElementById(\"#itemId\");",
+      "var element = getItem(\"itemId\");"
+    ],
+    "correctAnswer": [
+      "var item = document.getElementById(\"itemId\");",
+      "var item = document.querySelector(\".itemClass\");"
+    ],
+    "explination": "getElementById should be called with just the id string, querySelector can be used to target classes or ids, however unlike getElementById you need to tell the selector how to find with a prefix",
+    "reference": [
+      "MDN - getElementById: https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById",
+      "MDN - querySelector: https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector",
+      "W3 - CSS/querySelector Prefixes: https://www.w3schools.com/cssref/css_selectors.php"
+    ],
+    "time": 60
+  },
+
+  "question3": {
+    "question": "How Can You Declare Attributes That Can Be Selected By JavaScript On HTML Elements?",
+    "answers": [
+      "&lt;div id=\"divId\"&gt;",
+      "&lt;div data-id=\"divId\"&gt;",
+      "&lt;div class=\"divClass\"&gt;",
+      "&lt;div divId=\"divIdValue\"&gt;",
+      "&lt;div=\"divId\"&gt;"
+    ],
+    "correctAnswer": [
+      "&lt;div id=\"divId\"&gt;",
+      "&lt;div data-id=\"divId\"&gt;",
+      "&lt;div class=\"divClass\"&gt;",
+      "&lt;div divId=\"divIdValue\"&gt;"
+    ],
+    "explination": "Any custom attribute with a key = value should technically work, however the general rule is name by data-Key because any attribute tagged with data- HTML will recognize as a local/custom property",
+    "reference": [
+      "MDN - getElementById: https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById",
+      "MDN - querySelector: https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector",
+      "MDN - getAttribute: https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttribute",
+      "MDN - setAttribute: https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttribute",
+      "MDN - Using Data Attributes To Pass Data To HTMLElement Type In JS: https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes"
+    ]
+  },
+
+  "question4": {
+    "question": "Will This Snippet Run?```function test(arr) {\n\tarr.forEach((val)=>{\n\t\tconsole.log(val);\n\t}\n}\nconst newArray = [1, \"red\", true];\ntest(newArray);```",
+    "answers": [
+      "Yes, it is stable",
+      "Yes, however there are cases it can be unstable and/or fail",
+      "No, the function does not properly return a value",
+      "No, the function does not correctly iterate through the array",
+      "No, this is just bad code"
+    ],
+    "correctAnswer": "Yes, however there are cases it can be unstable and/or fail",
+    "explination": "This code is stable in the current state and would continue to be as long as the parameter that gets passed to the test function is an array. The issue is that when the datatype is not an array, and is instead a string or a number for example, .forEach will either run for each letter of a string, or in the case of the data being a number not run at all and throw an exception. This code is stable but does not process errors or validate what is being passed to it whatsoever",
+    "reference": [
+      "MDN - Type Validation And Error Handling In Functions: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Control_flow_and_error_handling#example_2"
+    ],
+    "time": 60,
+    "codeBlockLineStartNum": 12
+  }
+}
