@@ -3,7 +3,7 @@
 import { promises as fs } from "fs";
 
 export async function GET() {
-  const file = await fs.readFile("./results.json", "utf8");
+  const file = await fs.readFile("./src/app/results.json", "utf8");
   const fileContents = await JSON.parse(file);
 
   return new Response(JSON.stringify(fileContents));
@@ -15,7 +15,7 @@ export async function POST(req: Request) {
 
   if (authToken == process.env.NEXT_PUBLIC_POST_KEY) {
     try {
-      const file = await fs.writeFile("./results.json", body, "utf8");
+      const file = await fs.writeFile("./src/app/results.json", body, "utf8");
 
       return new Response(JSON.stringify({ ok: 200 }));
     } catch (err) {

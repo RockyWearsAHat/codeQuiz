@@ -6,7 +6,7 @@ export async function POST(req: Request) {
   const body = await req.text();
   let arr = JSON.parse(body);
 
-  const file = await fs.readFile(`./questions.json`, "utf8");
+  const file = await fs.readFile(`./src/app/questions.json`, "utf8");
 
   const data = JSON.parse(file);
   const dataArr = Array<any>();

@@ -4,7 +4,7 @@ import { promises as fs } from "fs";
 import prisma from "./db";
 
 export async function POST(req: Request) {
-  const file = await fs.readFile("./results.json", "utf8");
+  const file = await fs.readFile("./src/app/results.json", "utf8");
   const fileContents = await JSON.parse(file);
   const name = await req.json();
 
