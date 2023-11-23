@@ -6,7 +6,10 @@ export async function POST(req: Request) {
   const body = await req.text();
   let arr = JSON.parse(body);
 
-  const file = await fs.readFile("./src/app/framework/questions.json", "utf8");
+  const file = await fs.readFile(
+    `${process.env.VERCEL_URL}/src/app/framework/questions.json`,
+    "utf8"
+  );
 
   const data = JSON.parse(file);
   const dataArr = Array<any>();
