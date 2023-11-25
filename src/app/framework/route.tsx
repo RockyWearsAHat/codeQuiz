@@ -6,12 +6,12 @@ export async function POST(req: Request) {
   const body = await req.text();
   let arr = JSON.parse(body);
 
-  const file = await fs.readFile(
+  const file = await fetch(
     `https://raw.githubusercontent.com/RockyWearsAHat/codeQuiz/main/src/app/questions.json`,
-    "utf8"
+    { method: "GET" }
   );
 
-  const data = JSON.parse(file);
+  const data = await file.json();
   const dataArr = Array<any>();
   const questionsLength = Object.keys(data).length;
 
