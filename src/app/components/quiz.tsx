@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useState } from "react";
+import { deleteAllCookies } from "../page";
 
 type Props = {
   timerEnabled: boolean;
@@ -51,7 +52,15 @@ const Quiz = (props: Props) => {
   //KEEP TRACK OF CURRENT TIME
   const [currentTime, setCurrentTime] = useState(0);
 
+  let lastTimerSpan = 0;
+
   const timer = (initialTime?: number) => {
+    let stopTimerFlag = false;
+    if (
+      document.getElementById("submitQuestion")!.innerHTML == "Next Question"
+    ) {
+      stopTimerFlag = true;
+    }
     // console.log(currentTime);
     //GET THE TIMER SPAN TO DISPLAY TEXT
     const timerSpan = document.getElementById("currentTime");
@@ -64,30 +73,30 @@ const Quiz = (props: Props) => {
     //IF THE CURRENT TIME IS 0 OR LESS
     if (currentTime <= 0) {
       //AUTO SUBMIT QUESTION
+      setSubmitted(true);
       submitQuestion();
       return;
     }
 
-    if (!submitted) {
+    if (!submitted && currentTime >= 0 && !stopTimerFlag) {
       //SET A TIMEOUT FOR 1s
       setTimeout(() => {
-        if (submitted) {
-          setCurrentTime(0);
-          return;
-        }
         //ELSE DECREMENT TIME
         let tempTime = currentTime;
         tempTime--;
 
         const currentTotalTime = totalTime + 1;
-        // console.log(currentTotalTime);
-        setTotalTime(currentTotalTime);
 
         //SET TIMER SPAN CONTENT TO THE CURRENT TIME
         timerSpan!.textContent = "- " + String(tempTime);
 
         //SET TIMER STATE
-        setCurrentTime(tempTime);
+        if (!stopTimerFlag) {
+          setCurrentTime(tempTime);
+          setTotalTime(currentTotalTime);
+        } else {
+          setCurrentTime(0);
+        }
       }, 1000);
     }
   };
@@ -105,6 +114,12 @@ const Quiz = (props: Props) => {
   useEffect(() => {
     timer();
   }, [currentTime]);
+
+  useEffect(() => {
+    if (submitted) {
+      setCurrentTime(0);
+    }
+  }, [submitted]);
 
   //FIRE EVENT WHEN THE GAME IS STARTING BECAUSE THIS ELEMENT IS
   //IN PAGE.TSX
@@ -412,9 +427,11 @@ const Quiz = (props: Props) => {
 
   //SUBMIT QUESTION
   const submitQuestion = () => {
+    // STOP TIMER
+    setCurrentTime(0);
+
     //SET STATE TO DISABLE CHOICES
     setSubmitted(true);
-    setCurrentTime(0);
 
     //GET ALL THE QUESTIONS THE USER HAS ANSWERED ALREADY AND
     //STORE THEM LOCALLY
@@ -783,26 +800,12 @@ const Quiz = (props: Props) => {
     // console.log(
     //   `quiz has ended! total score: ${currentCorrect} correct, ${currentIncorrect} incorrect`
     // );
-
-    fetch("./results/", {
-      method: "POST",
-      //I KNOW THIS IS NOT SECURE WHATSOEVER, THE KEY IS QUITE LITERALLY
-      //EXPOSED IN THE NETWORK REQUEST, THIS SHOULD BE CALLED THROUGH
-      //MULTIPLE LAYERS OF OBFISCATION, BUT THIS IS NOT A PROJECT
-      //I'M TOO WORRIED ABOUT SECURITY WITH
-      headers: {
-        writeKey: "Bearer " + process.env.NEXT_PUBLIC_POST_KEY,
-      },
-      body: JSON.stringify({
-        correct: currentCorrect,
-        incorrect: currentIncorrect,
-        totalTime: totalTime,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        // console.log(data);
-      });
+    deleteAllCookies();
+    document.cookie = JSON.stringify({
+      correct: currentCorrect,
+      incorrect: currentIncorrect,
+      totalTime: totalTime,
+    });
   };
 
   //ADD EVENT LISTENERS TO ALL OF THE DIVS AND H3S TO CHECK THE RESPECTIVE

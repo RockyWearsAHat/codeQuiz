@@ -13,6 +13,17 @@ let highscoresState = false;
 let highscoresLoading = false;
 let currentHighscores: Score[] = [];
 
+export function deleteAllCookies() {
+  const cookies = document.cookie.split(";");
+
+  for (let i = 0; i < cookies.length; i++) {
+    const cookie = cookies[i];
+    const eqPos = cookie.indexOf("=");
+    const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+    document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+  }
+}
+
 export default function Home() {
   const [timerEnabled, setTimerEnabled] = useState(false);
 
@@ -90,22 +101,12 @@ export default function Home() {
   const showResults = () => {
     setQuizDone(true);
 
-    fetch("/results/", {
-      method: "GET",
-    })
-      .then((res) => {
-        const json = res.json();
-        return json;
-      })
-      .then((json) => {
-        try {
-          setCorrectCount(json.correct);
-          setIncorrectCount(json.incorrect);
-          setTotalTime(json.totalTime);
-        } catch (err) {
-          console.log(err);
-        }
-      });
+    console.log(document.cookie);
+    const cookie = JSON.parse(document.cookie);
+
+    setCorrectCount(cookie.correct);
+    setIncorrectCount(cookie.incorrect);
+    setTotalTime(cookie.totalTime);
   };
 
   useEffect(() => {

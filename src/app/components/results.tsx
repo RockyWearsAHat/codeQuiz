@@ -24,13 +24,23 @@ async function saveScore(e: React.FormEvent<HTMLFormElement>) {
     scoreStatusText.style.color = "red";
     return;
   }
-  const postBody = JSON.stringify({ name: nameInput.value });
+  const results: { correct: number; incorrect: number; totalTime: number } =
+    JSON.parse(document.cookie);
+  console.log(results);
+  const postBody = {
+    name: nameInput.value,
+    correct: results.correct,
+    incorrect: results.incorrect,
+    time: results.totalTime,
+  };
+  console.log(postBody);
+
   const res = await fetch("./results/api/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: postBody,
+    body: JSON.stringify(postBody),
   });
 
   if (!res.ok) {

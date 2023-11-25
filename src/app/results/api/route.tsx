@@ -1,15 +1,18 @@
 "use server";
-
-import { promises as fs } from "fs";
+import { time } from "console";
 import prisma from "./db";
 
 export async function POST(req: Request) {
-  const file = await fs.readFile("./src/app/results.json", "utf8");
-  const fileContents = await JSON.parse(file);
-  const name = await req.json();
+  const json = await req.json();
+  console.log(json);
 
   const savedScore = await prisma.score.create({
-    data: { ...name, ...fileContents },
+    data: {
+      name: json.name,
+      correct: json.correct,
+      incorrect: json.incorrect,
+      totalTime: json.time,
+    },
   });
 
   return new Response(JSON.stringify(savedScore.id));
