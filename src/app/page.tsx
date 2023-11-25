@@ -13,7 +13,7 @@ let highscoresState = false;
 let highscoresLoading = false;
 let currentHighscores: Score[] = [];
 
-export function deleteAllCookies() {
+export const deleteAllCookies = (): void => {
   const cookies = document.cookie.split(";");
 
   for (let i = 0; i < cookies.length; i++) {
@@ -22,7 +22,7 @@ export function deleteAllCookies() {
     const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
     document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
   }
-}
+};
 
 export default function Home() {
   const [timerEnabled, setTimerEnabled] = useState(false);
