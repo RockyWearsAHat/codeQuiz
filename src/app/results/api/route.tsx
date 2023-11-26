@@ -1,5 +1,4 @@
 "use server";
-import { time } from "console";
 import prisma from "./db";
 
 export async function POST(req: Request) {
