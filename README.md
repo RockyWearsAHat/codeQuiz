@@ -6,10 +6,6 @@ Each question is declared inside of questions.json, and there are some options f
 
 There are also some simple options for taking the quiz, the leaderboards are arranged by correct scores and also by the lowest time, there is an option to turn the timer off, but the prompt to upload to the database will not display if you decide to play without the timer.
 
-Questions are drawn randomly from the questions.json file and will not repeat until the length of the file is hit (only will occur if quizLength is greater than the length of questions.json, quizLength can be adjusted inside of page.tsx on `<Quiz numberOfQuestions={??}>`).
+Questions are drawn randomly from the questions.json file and will not repeat until the length of the file is hit.
 
-Scores are stored on a PlanetScale DB because frankly I didn't want to write an entire server for this, that's overkill on overkill.
-
-Please don't steal my .env keys they're very near and dear to my heart, this is horribly horribly insecure but that was not the focus
-
-I tried to upload this to github pages, but because the fetching of questions is done via my own "backend" API request to the serverside of the application github is not too happy about dynamically generating those pages unfortunatley. I know that I've been marked down in the past for not using github pages to deploy my application, but this time there actually is a valid reason and I really did try, I just learned that you can't do server side calls and rendering atleast the way I'm doing so in next on GitHub pages.
+Scores are stored on a PlanetScale DB and this site is built with NextJS, so unfortunatley this site isn't particularly functional on github pages. The weather API will be built in pure JS though so it will be. I'm sorry for publishing this on Vercel yet again, I will not be doing so in the future.
